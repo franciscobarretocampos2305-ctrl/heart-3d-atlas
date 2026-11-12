@@ -2,7 +2,7 @@
 
 Atlas 3D do coração humano que segue o caminho do sangue. Ao rolar a página, a câmera passa por 18 estruturas, e cada uma tem explicação de função, anatomia, problemas de saúde e uma curiosidade.
 
-**▶ Ver demo:** `https://franciscobarretocampos2305-ctrl.github.io/heart-3d-atlas/` *(troque pelo seu link depois de publicar)*
+**▶ Ver demo:** `https://franciscobarretocampos2305-ctrl.github.io/heart-3d-atlas/` 
 
 <!-- Coloque aqui um print ou GIF do site: arraste a imagem para este arquivo no GitHub. -->
 
