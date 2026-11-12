@@ -4,7 +4,7 @@ Atlas 3D do coração humano que segue o caminho do sangue. Ao rolar a página, 
 
 **▶ Ver demo:** `https://franciscobarretocampos2305-ctrl.github.io/heart-3d-atlas/` 
 
-<!-- Coloque aqui um print ou GIF do site: arraste a imagem para este arquivo no GitHub. -->
+<img width="575" height="608" alt="heart github" src="https://github.com/user-attachments/assets/db052bb0-0061-42d5-8bf5-c49030ad9baa" />
 
 ## Recursos
 
