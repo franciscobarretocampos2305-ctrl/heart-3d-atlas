@@ -9,7 +9,6 @@ import { Marcadores } from "./Marcadores";
 import { pulso, relogio } from "@/lib/batimento";
 
 export type InfoModelo = {
-  /** Grupo que contém o coração e os marcadores. Use localToWorld para converter pontos. */
   grupo: THREE.Group;
 };
 
@@ -27,7 +26,6 @@ type Props = {
   onMarcar: (p: PontoMarcado) => void;
 };
 
-/** Converte o material original em MeshPhysicalMaterial para dar aspecto de tecido úmido. */
 function paraFisico(src: THREE.Material): THREE.MeshPhysicalMaterial {
   const r = CONFIG.realismo;
   const m = new THREE.MeshPhysicalMaterial({ roughness: r.roughness, metalness: 0 });
@@ -53,7 +51,6 @@ export function HeartModel({ ativo, mostrarNomes, modoMarcar, onSelecionar, onPr
   const prontoRef = useRef(onPronto);
   prontoRef.current = onPronto;
 
-  // O heart.glb já vem centralizado e virado de frente. Aqui só trocamos o material.
   useMemo(() => {
     scene.traverse((o) => {
       const malha = o as THREE.Mesh;
@@ -67,14 +64,13 @@ export function HeartModel({ ativo, mostrarNomes, modoMarcar, onSelecionar, onPr
     if (grupo.current) prontoRef.current({ grupo: grupo.current });
   }, [scene]);
 
-  // Batimento "tum-tá" sutil, no mesmo relógio do som
   useFrame(() => {
     if (!batida.current) return;
     const p = CONFIG.batimento.ativo ? pulso(relogio()) : 0;
     batida.current.scale.setScalar(1 + CONFIG.batimento.intensidade * p);
   });
 
-  // Modo marcação (/?marcar): clique no modelo para descobrir as coordenadas de um ponto.
+  // ?marcar
   const aoClicar = (e: ThreeEvent<MouseEvent>) => {
     if (!modoMarcar || e.delta > 4 || !grupo.current) return;
     e.stopPropagation();

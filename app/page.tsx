@@ -12,7 +12,6 @@ import { desligarSom, ligarSom } from "@/lib/som";
 
 const HeartViewer = dynamic(() => import("@/components/HeartViewer"), { ssr: false });
 
-/** Altura da tela onde o texto "está sendo lido": meio da tela no desktop, parte de baixo no celular. */
 const linhaLeitura = () =>
   window.innerHeight * (window.matchMedia("(min-width: 1024px)").matches ? 0.5 : 0.78);
 
@@ -59,7 +58,6 @@ export default function Page() {
     };
   }, [atualizarPeloScroll]);
 
-  // Clique no modelo ou na navegação: foca a parte e rola o texto até ela.
   const selecionar = useCallback(
     (id: string) => {
       setAtivo(id);
@@ -92,7 +90,6 @@ export default function Page() {
         </p>
       </header>
 
-      {/* Visualizador 3D */}
       <div className="fixed inset-x-0 top-0 z-20 h-[55svh] border-b border-white/5 bg-ink lg:inset-y-0 lg:left-[40%] lg:h-auto lg:border-b-0">
         <ErrorBoundary fallback={<SemModelo />}>
           <HeartViewer
@@ -110,7 +107,6 @@ export default function Page() {
           Arraste para girar · Role sobre o coração para zoom · Clique num número
         </p>
 
-        {/* Navegação lateral (desktop) */}
         <nav className="absolute right-6 z-50 top-1/2 hidden -translate-y-1/2 flex-col items-end gap-2.5 lg:flex">
           {PARTES.map((p) => (
             <button
@@ -160,7 +156,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Texto que rola */}
       <div className="relative z-10 pt-[55svh] lg:w-[40%] lg:pt-0">
         {PARTES.map((p, i) => (
           <Secao key={p.id} parte={p} indice={i} total={PARTES.length} ativa={p.id === ativo} />

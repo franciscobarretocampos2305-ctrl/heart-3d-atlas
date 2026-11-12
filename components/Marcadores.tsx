@@ -22,17 +22,12 @@ const _s = new THREE.Vector3();
 const ITENS = PARTES.map((parte, i) => ({ parte, numero: i + 1 })).filter((x) => x.parte.marcador);
 const sobrepoe = (a: Caixa, b: Caixa) => a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0;
 
-/**
- * Pontos numerados com nome em português e seta apontando para cada estrutura.
- * A cada quadro: esconde os que estão do outro lado do coração e, quando dois
- * ficam amontoados na tela, mostra só um (o ativo sempre tem prioridade).
- * Ao dar zoom eles se afastam e voltam a aparecer.
- */
 export function Marcadores({ ativo, mostrarNomes, onSelecionar }: Props) {
   const grupos = useRef<(THREE.Group | null)[]>([]);
   const els = useRef<(HTMLDivElement | null)[]>([]);
 
   useFrame(({ camera, size }) => {
+    // esconde marcadores atrás do coração ou sobrepostos
     const ocupadas: Caixa[] = [];
     const ordem = ITENS.map((_, k) => k).sort(
       (a, b) => Number(ITENS[b].parte.id === ativo) - Number(ITENS[a].parte.id === ativo)
@@ -112,7 +107,6 @@ function Ponto({ parte, numero, ativo, mostrarNome, onSelecionar }: PontoProps) 
         {ativo && <span className="absolute inset-0 animate-ping rounded-full bg-sangue/40" />}
       </button>
 
-      {/* Seta: linha diagonal do ponto até o nome */}
       <div
         className={`pointer-events-none absolute left-0 top-0 transition-opacity duration-200 ${
           mostrarNome ? "opacity-100" : "opacity-0 group-hover:opacity-100"

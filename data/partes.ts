@@ -1,9 +1,6 @@
 export type Marcador = {
-  /** Posição do ponto no modelo (coordenadas do heart.glb). */
   ponto: [number, number, number];
-  /** De onde a câmera olha para o ponto (direção a partir do ponto). */
   direcao: [number, number, number];
-  /** Distância da câmera até o ponto. Menor = mais zoom. */
   distancia: number;
 };
 
@@ -11,18 +8,15 @@ export type Parte = {
   id: string;
   nome: string;
   categoria: string;
-  /** Sem marcador = visão geral do coração inteiro. Use /?marcar para gerar novos. */
   marcador?: Marcador;
   resumo: string;
   funcao: string;
-  /** Como é: forma, partes e localização. */
   estrutura: string;
-  /** Quando algo dá errado: doenças e problemas ligados à estrutura. */
   saude: string;
   curiosidade: string;
 };
 
-// A ordem segue o caminho do sangue pelo coração.
+// ordem = caminho do sangue
 export const PARTES: Parte[] = [
   {
     id: "geral",

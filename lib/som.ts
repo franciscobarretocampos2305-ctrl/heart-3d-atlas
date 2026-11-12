@@ -1,11 +1,6 @@
 import { CONFIG } from "@/data/config";
 import { BULHA_1, BULHA_2, periodo, relogio } from "./batimento";
 
-/**
- * Som do batimento gerado por código (Web Audio), sem arquivo de áudio.
- * Cada bulha é um baque grave com a frequência caindo, um pouco de "textura"
- * de ruído abafado e um eco curto de caixa torácica, como num estetoscópio.
- */
 
 type Bulha = { freqInicio: number; freqFim: number; duracao: number; ganho: number; corteRuido: number };
 
@@ -26,7 +21,6 @@ function ruidoBranco(c: BaseAudioContext, segundos: number) {
   return b;
 }
 
-/** Eco curto e abafado, como o som ressoando dentro do peito. */
 function ecoToracico(c: BaseAudioContext) {
   const seg = 0.35;
   const b = c.createBuffer(2, Math.ceil(c.sampleRate * seg), c.sampleRate);
@@ -67,7 +61,7 @@ async function renderizar(bulha: Bulha): Promise<AudioBuffer> {
     g.gain.exponentialRampToValueAtTime(0.0001, t0 + queda);
   };
 
-  // Baque grave principal
+  // grave
   const grave = off.createOscillator();
   grave.type = "sine";
   grave.frequency.setValueAtTime(bulha.freqInicio, t0);
@@ -76,7 +70,7 @@ async function renderizar(bulha: Bulha): Promise<AudioBuffer> {
   envelope(gGrave, bulha.ganho, 0.012, bulha.duracao);
   grave.connect(gGrave).connect(seco);
 
-  // Harmônico: deixa o batimento audível em caixinhas e fones pequenos
+  // harmônico
   const harm = off.createOscillator();
   harm.type = "triangle";
   harm.frequency.setValueAtTime(bulha.freqInicio * 2, t0);
@@ -85,7 +79,7 @@ async function renderizar(bulha: Bulha): Promise<AudioBuffer> {
   envelope(gHarm, bulha.ganho * 0.22, 0.008, bulha.duracao * 0.7);
   harm.connect(gHarm).connect(seco);
 
-  // Textura: ruído abafado, o "estalo" macio das valvas fechando
+  // ruído
   const ruido = off.createBufferSource();
   ruido.buffer = ruidoBranco(off, 0.3);
   const fRuido = off.createBiquadFilter();
@@ -103,7 +97,6 @@ async function renderizar(bulha: Bulha): Promise<AudioBuffer> {
   return off.startRendering();
 }
 
-/** Converte um instante do relógio da animação para o relógio do áudio, já descontando o atraso do alto-falante. */
 function paraTempoDeAudio(c: AudioContext, tRelogio: number) {
   const ts = c.getOutputTimestamp?.();
   if (ts && ts.contextTime !== undefined && ts.performanceTime) {
@@ -127,7 +120,7 @@ function agendar() {
       const t = ciclo + fase * p;
       if (t <= agendadoAte || t < agora - 0.02 || t > horizonte) continue;
       const quando = paraTempoDeAudio(ctx, t);
-      if (quando < ctx.currentTime - 0.03) continue; // atrasado demais, pula
+      if (quando < ctx.currentTime - 0.03) continue;
       const fonte = ctx.createBufferSource();
       fonte.buffer = buf;
       fonte.connect(mestre);
@@ -168,7 +161,6 @@ export function desligarSom() {
   }, 300);
 }
 
-/** Quanto mais perto do coração, mais alto. Recebe a distância da câmera. */
 export function volumePorDistancia(distancia: number) {
   const perto = 0.6;
   const longe = 6;

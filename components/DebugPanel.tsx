@@ -3,11 +3,7 @@
 import { useState } from "react";
 import type { PontoMarcado } from "./HeartModel";
 
-/**
- * Modo marcação: abra o site com /?marcar no fim do endereço.
- * Gire a câmera até ver bem a estrutura, clique nela e copie a linha gerada
- * para o campo "marcador" da parte certa em data/partes.ts.
- */
+// abrir com ?marcar na url
 export function DebugPanel({ marcado }: { marcado: PontoMarcado | null }) {
   const [copiado, setCopiado] = useState(false);
   const linha = marcado

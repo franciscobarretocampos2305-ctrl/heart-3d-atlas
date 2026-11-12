@@ -19,7 +19,6 @@ type Props = {
   onMarcar: (p: PontoMarcado) => void;
 };
 
-/** Leva a câmera até o marcador da parte ativa. Zoom e rotação continuam livres. */
 function Camera({ ativo, info }: { ativo: string; info: InfoModelo | null }) {
   const ref = useRef<CameraControls>(null);
   const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera;
@@ -41,7 +40,6 @@ function Camera({ ativo, info }: { ativo: string; info: InfoModelo | null }) {
       dir = new THREE.Vector3(...m.direcao).transformDirection(g.matrixWorld);
       dist = m.distancia * escala;
     } else {
-      // Enquadra pela altura e largura reais do coração, deixando uma margem pequena.
       const caixa = new THREE.Box3().setFromObject(g);
       const tam = caixa.getSize(new THREE.Vector3());
       alvo = caixa.getCenter(new THREE.Vector3());
@@ -60,13 +58,11 @@ function Camera({ ativo, info }: { ativo: string; info: InfoModelo | null }) {
   return <CameraControls ref={ref} makeDefault smoothTime={0.6} minDistance={0.3} maxDistance={9} dollyToCursor />;
 }
 
-/** Quanto mais zoom, mais alto o som do batimento. */
 function VolumePorDistancia() {
   useFrame(({ camera }) => volumePorDistancia(camera.position.length()));
   return null;
 }
 
-/** Estúdio de luz feito com painéis virtuais: realista e sem baixar HDRI. */
 function Iluminacao() {
   return (
     <>
