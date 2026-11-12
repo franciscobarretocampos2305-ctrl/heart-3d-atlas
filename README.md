@@ -1,49 +1,26 @@
-# Coração humano: atlas 3D interativo
+# Heart 3D Atlas
 
-Atlas 3D do coração humano que segue o caminho do sangue. Ao rolar a página, a câmera passa por 18 estruturas, e cada uma tem explicação de função, anatomia, problemas de saúde e uma curiosidade.
+Atlas 3D interativo do coração humano. Ao rolar a página, a câmera passa pelas estruturas seguindo o caminho do sangue, e cada uma tem uma explicação curta.
 
-**▶ Ver demo:** `https://franciscobarretocampos2305-ctrl.github.io/heart-3d-atlas/` 
+**Demo:** https://franciscobarretocampos2305-ctrl.github.io/heart-3d-atlas/
 
-<img width="575" height="608" alt="heart github" src="https://github.com/user-attachments/assets/db052bb0-0061-42d5-8bf5-c49030ad9baa" />
+<img width="575" height="608" alt="heart github" src="https://github.com/user-attachments/assets/ce26a001-7873-4e22-9e4c-b5a39cf6e01e" />
 
-## Recursos
+## O que tem
 
-- Modelo 3D de alta resolução (~1 milhão de triângulos) cortado para mostrar o interior
-- Tour guiado pelo scroll: veias cavas → átrios → valvas → ventrículos → aorta → coronárias
-- Marcadores numerados com nomes em português; clique para dar zoom
-- Batimento animado com som sincronizado (gerado por código, sem arquivo de áudio)
-- Funciona no computador e no celular
+- Modelo 3D do coração cortado ao meio, para ver o interior
+- 18 estruturas marcadas com número, com zoom ao clicar
+- Batimento animado com som
 
 ## Tecnologias
 
-Next.js · React Three Fiber · three.js · Tailwind CSS · Web Audio API · GitHub Pages
+Next.js, React Three Fiber, three.js, Tailwind CSS e Web Audio API.
 
 ## Rodar no computador
 
-```bash
-npm install
-npm run dev
-```
-
-Abra http://localhost:3000.
-
-## Publicar no GitHub Pages
-
-1. Crie um repositório no GitHub e envie esta pasta usando o **GitHub Desktop**. O upload pelo navegador não aceita o modelo 3D, que passa de 25 MB.
-2. No repositório, vá em **Settings → Pages** e, em **Source**, escolha **GitHub Actions**.
-3. Pronto: a cada envio, o GitHub publica sozinho (aba **Actions**). O link fica em `https://SEU-USUARIO.github.io/NOME-DO-REPO/`.
-
-## Ajustes
-
-| O que | Onde |
-|---|---|
-| Textos de cada estrutura | `data/partes.ts` |
-| Brilho, batimento (bpm) | `data/config.ts` |
-| Som do batimento | `lib/som.ts` |
-| Posição dos marcadores | abra o site com `?marcar` no fim do endereço, clique na estrutura e copie a linha gerada |
+    npm install
+    npm run dev
 
 ## Créditos
 
-Modelo 3D: “Open Heart model”, de Dr. Alex Cheroske, licença [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (Sketchfab). Uso não comercial.
-
-Projeto educacional. Os textos têm caráter didático e não substituem orientação médica.
+Modelo 3D: "Open Heart model", de Dr. Alex Cheroske, licença CC BY-NC 4.0 (Sketchfab). Uso não comercial.
